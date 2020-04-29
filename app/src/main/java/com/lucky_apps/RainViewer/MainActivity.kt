@@ -1,6 +1,7 @@
 package com.lucky_apps.RainViewer
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.huawei.hms.maps.HuaweiMap
 import com.huawei.hms.maps.OnMapReadyCallback
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, HuaweiMap.OnMapLoa
     }
 
     override fun onMapLoaded() {
+        Log.d("onMapLoaded", "onMapLoaded")
         if (index >= imageUrls.size) {
             index = 0
         }
