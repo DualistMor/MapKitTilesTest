@@ -1,21 +1,22 @@
 package com.lucky_apps.RainViewer
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.huawei.hms.maps.HuaweiMap
-import com.huawei.hms.maps.OnMapReadyCallback
-import com.huawei.hms.maps.SupportMapFragment
-import com.huawei.hms.maps.model.TileOverlayOptions
-import com.huawei.hms.maps.model.TileProvider
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.TileOverlayOptions
+import com.google.android.gms.maps.model.TileProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(), OnMapReadyCallback, HuaweiMap.OnMapLoadedCallback {
+class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLoadedCallback {
 
     lateinit var mapFragment: SupportMapFragment
-    lateinit var map: HuaweiMap
+    lateinit var map: GoogleMap
 
     val ioScope = CoroutineScope(Dispatchers.IO)
     val uiScope = CoroutineScope(Dispatchers.Main)
@@ -34,12 +35,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, HuaweiMap.OnMapLoa
     }
 
     var index: Int = 0
-    override fun onMapReady(map: HuaweiMap) {
+    override fun onMapReady(map: GoogleMap) {
         this.map = map
         map.setOnMapLoadedCallback(this)
     }
 
     override fun onMapLoaded() {
+        Log.d("onMapLoaded", "onMapLoaded")
         if (index >= imageUrls.size) {
             index = 0
         }
